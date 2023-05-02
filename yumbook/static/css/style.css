@@ -1,0 +1,112 @@
+/* YumBook: A beautiful, free, privacy-respecting recipe
+library and printable generator */
+
+/* Removing unneccessary block element decoration and preliminary actions */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+:root{
+  --bottom-border: #f5f5f5;
+  --button: #e6e6fa;
+  --button-hover: #fff0f5;
+  --button-link: #a020f0;
+  --content-background: #2b2929;
+  --header-bg: #9b30ff;
+  --content-default: #fafafa;
+  --content-h1: #fffafa;
+}
+
+.container{
+  height: 100%;
+  width: 100%;
+}
+
+/* Header stylization */
+
+.header{
+  display: flex;
+  flex-direction: rows;
+  flex-wrap: nowrap;
+  border-bottom: 2px solid var(--bottom-border);
+  padding: 1em 1em;
+  text-align: center;
+  background-color: var(--header-bg);
+}
+
+.item > .favicon {
+  padding-top: 5px;
+  padding-right: 20px;
+}
+
+.favicon > .favicon{
+  width: 60px;
+  height: 60px;
+}
+
+.item > .actions{
+  display: flex;
+}
+
+.actions {
+  display: flex;
+  padding-top: 16px;
+  padding-left: 50px;
+}
+
+.action {
+  display: inline-flex;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: auto;
+  margin-right: 15px;
+  border-radius: 17px;
+  background-color: var(--button);
+  color: var(--button-link);
+  text-decoration: none;
+}
+
+.action:hover{
+  background-color: var(--button-hover);
+}
+
+.user {
+  display: flex;
+  padding-top: 16px;
+  padding-left: 815px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.content{
+  background-color: var(--content-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: var(--content-default);
+}
+
+.content > h1{
+  color: var(--content-h1);
+}
+
+.content > ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

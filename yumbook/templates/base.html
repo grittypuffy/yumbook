@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{{ url_for('static', filename='favicon/favicon.png') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename ='/css/style.css') }}">
+	<title>{% block title %}{% endblock %} - YumBook</title>
+  </head>
+  <body>
+	<div class="container">
+	  <header class="header">
+		<div class="item">
+		  <div class="favicon">
+			<img src="{{ url_for('static', filename='favicon/favicon.png') }}" width="65" height="65" />
+		  </div>
+		</div>
+		<div class="item">
+		  <nav class="actions">
+			<a class="action" href="/create">
+			  <i icon-name="file-plus" class="favicon"></i>
+			  Create
+			</a>
+			<a class="action" href="/preview">
+			  <i icon-name="eye" class="icon"></i>
+			  Preview
+			</a>
+			<a class="action" href="/browse">
+			  <i icon-name="globe" class="icon"></i>
+			  Browse
+			</a>
+		  </nav>
+		</div>
+		<div class="item">
+		  <nav class="user">
+			<a class="action" href="/sign_in"><i icon-name="log-in" class="icon"></i>Sign in</a>
+			<a class="action" href="/sign_up"><i icon-name="user" class="icon"></i>Sign up</a>
+		  </nav>
+		</div>
+	  </header>
+	  <div class="content">
+		{% block content %}{% endblock %}
+	  </div>
+	</div>
+	<script src="{{ url_for('static', filename='js/lib/lucide.js' ) }}"></script>
+	<script>
+	 lucide.createIcons();
+	</script>
+	{% block script %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename ='/css/style.css') }}" />
+	<title>Create - YumBook</title>
+	</head>
+  <body>
+	<div>
+	  <form action="/preview" method="post" enctype="multipart/form-data">
+		<label for="name">Title</label>
+		<input type="text" id="title" name="title">
+		<label for="ingredients">Ingredients</label>
+		<input type="text" id="ingredients" name="ingredients" />
+		<label for="background">Select a background image</label>
+		<input type="file" id="background" name="background" multiple />
+		<button type="submit">Create</button>
+	  </form>
+	</div>
+  </body>
+</html>
