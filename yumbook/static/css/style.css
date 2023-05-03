@@ -11,7 +11,7 @@ html, body{
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Montserrat", sans-serif;
 }
 
 :root{
@@ -23,6 +23,14 @@ html, body{
   --header-bg: #9b30ff;
   --content-default: #fafafa;
   --content-h1: #fffafa;
+  --create-form-bg: #a020f0;
+  --create-form-field: #ded2d6;
+  --create-form-input: #2f4f4f;
+  --create-form-file-bg: #54ff9f;
+  --create-form-input-hover:  #fb5888;
+  --create-form-label: #000000;
+  --preview-heading: #f0ffff;
+  --preview-title: #fff5ee;
 }
 
 .container{
@@ -34,22 +42,22 @@ html, body{
 
 .header{
   display: flex;
-  flex-direction: rows;
+  flex-direction: row;
   flex-wrap: nowrap;
-  border-bottom: 2px solid var(--bottom-border);
-  padding: 1em 1em;
+  border-bottom: .02rem solid var(--bottom-border);
+  padding: 0.3rem;
   text-align: center;
   background-color: var(--header-bg);
 }
 
 .item > .favicon {
-  padding-top: 5px;
-  padding-right: 20px;
+  padding-top: .4rem;
+  padding-right: .2rem;
 }
 
-.favicon > .favicon{
-  width: 60px;
-  height: 60px;
+.favicon{
+  width: 4rem;
+  height: 4rem;
 }
 
 .item > .actions{
@@ -58,19 +66,19 @@ html, body{
 
 .actions {
   display: flex;
-  padding-top: 16px;
-  padding-left: 50px;
+  padding-top: 0.8rem;
+  padding-left: 2rem;
 }
 
 .action {
   display: inline-flex;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   margin-left: auto;
-  margin-right: 15px;
-  border-radius: 17px;
+  margin-right: 1.2rem;
+  border-radius: 1rem;
   background-color: var(--button);
   color: var(--button-link);
   text-decoration: none;
@@ -80,17 +88,7 @@ html, body{
   background-color: var(--button-hover);
 }
 
-.user {
-  display: flex;
-  padding-top: 16px;
-  padding-left: 815px;
-}
-
-.icon {
-  margin-right: 5px;
-}
-
-.content{
+.content {
   background-color: var(--content-background);
   display: flex;
   flex-direction: column;
@@ -101,6 +99,18 @@ html, body{
   color: var(--content-default);
 }
 
+.user {
+  display: flex;
+  padding-top: 0.8rem;
+  padding-left: 82rem;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
+
+
+
 .content > h1{
   color: var(--content-h1);
 }
@@ -109,4 +119,121 @@ html, body{
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  background: var(--create-form-bg);
+  border-radius: 1rem;
+  color: inherit;
+  padding: 1.5rem;
+}
+
+.field {
+  padding: 0.8em;
+  color: var(--create-form-field);
+  text-align: center;
+  display: grid;
+}
+
+.create-label {
+  padding: 0.4em;
+  color: var(--create-form-label);
+}
+
+.create-input {
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: .15em solid var(--create-form-input);
+}
+
+.create-input:hover {
+  border-color: var(--create-form-input-hover);
+  background-color: var(--button);
+}
+
+#background{
+  display: none;
+}
+
+.create-label.submit{
+  cursor: pointer;
+  background-color: var(--create-form-file-bg);
+  font-size: 1em;
+  color: var(--create-form-label);
+  border-radius: 1.3rem;
+  border: .15em solid var(--create-form-input);
+}
+
+.create-label.submit:hover {
+  background-color: var(--create-form-input-hover);
+  transition-duration: 0.3s;
+}
+
+.footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: .1rem;
+  background-color: var(--header-bg);
+  border-top: 2px solid var(--bottom-border);
+}
+
+.item > .copyleft{
+  display: inline-flex;
+  align-items: center;
+}
+
+.content a{
+  text-decoration: none;
+  color: var(--button-link);
+}
+
+h1.error{
+  font-size: 50px;
+}
+
+.lucide.lucide-upload.icon {
+  padding-top: 8px;
+}
+
+.recipe-preview{
+  display: grid;
+  border-radius: 1rem;
+  background-color: var(--create-form-bg);
+  padding: 0.25rem;
+}
+
+.recipe-title{
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--preview-title);
+}
+
+.recipe-image{
+  border-radius: 20px;
+  align-contents: center;
+  border: 3px solid var(--bottom-border);
+}
+
+.recipe-heading{
+  text-align: center;
+  color: var(--preview-heading);
+}
+
+.recipe-ingredient{
+  list-style-type: disc;
+  color: var(--button);
+  font-size: 1.1rem;
+}
+
+.recipe-directions{
+  color: var(--button);
+  font-size: 1.1rem;
+  text-align: justify-content;
+}
+
+.content>.user-action{
+  padding-top: 1rem;
 }

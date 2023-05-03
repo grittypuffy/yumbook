@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Preview{% endblock %}
+{% block content %}
+<div class="recipe-preview">
+  {% for info in data %}
+  {% if info == "name" %}
+  <div class="recipe-field">
+	<h1 class="recipe-title">{{ data[info].title() }}</h1>
+  </div>
+  {% elif info == "filename" %}
+  <div class="recipe-field">
+	<img src="{{ data[info] }}" class="recipe-image">
+  </div>
+  {% elif info == "ingredients" %}
+  <div class="recipe-field">
+	<h2 class="recipe-heading">Ingredients</h2>
+	<ul class="recipe-ingredient">
+	  {% for ingredient in data[info].split(", ") %}
+	  <li class="recipe-ingredient">{{ ingredient.capitalize() }}</li>
+	  {% endfor %}
+	</ul>
+  </div>
+  {% elif info == "directions" %}
+  <div class="recipe-field">
+	<h2 class="recipe-heading">Directions</h2>
+	<ol class="recipe-directions">
+	  {% for step in data[info].split("\r\n") %}
+	  <li class="recipe-directions">{{ step.capitalize() }}</li>
+	  {% endfor %}
+	</ol>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+<div class="user-action">
+  <div class="item">
+	<a href="{{ url_for('export') }}" class="action" target="_blank">Export data</a>
+  </div>
+</div>
+{% endblock %}

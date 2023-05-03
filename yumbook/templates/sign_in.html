@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Sign Up{% endblock %}
+{% block title %}Sign In{% endblock %}
 {% block content %}
-<h1 class="user-action">Sign Up</h1>
+<h1 class="user-action">Sign In</h1>
 <div class="user-action">
   <form method="post" action="/" class="create-form">
 	<div class="field">
@@ -9,19 +9,12 @@
 	  <input type="text" class="create-input" name="username" id="username">
 	</div>
 	<div class="field">
-	  <label for="mail" class="create-label">E-Mail</label>
-	  <input type="email" class="create-input" name="mail" id="mail">
-	</div>
-	<div class="field">
 	  <label for="password" class="create-label">Password</label>
 	  <input type="password" class="create-input" name="password" id="password">
 	</div>
 	<div class="field">
-	  <input type="submit" class="create-input" name="Submit" value="Sign up">
+	  <input type="submit" class="create-input" name="Submit" value="Sign In">
 	</div>
   </form>
 </div>
-{% endblock %}
-{% block script %}
-<script src="{{ url_for('static', filename='js/formValidate.js') }}"></script>
 {% endblock %}

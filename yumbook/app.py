@@ -2,17 +2,20 @@
 
 
 from flask import Flask, render_template, request, flash, redirect
+from flask import send_from_directory
 from werkzeug.utils import secure_filename
 from libmat2 import images
 import os
-"""import sqlite3 as sql
+import sqlite3 as sql
 import click
 import json
-"""
+
 
 OS_CWD = os.getcwd()
-UPLOAD_FOLDER = '../../sample_data'
+UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+SCHEMA_DIR = 'schema'
+DB_DIR = 'schema/database'
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'APP_SECRET_KEY'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -23,6 +26,24 @@ def allowed_file(filename):
     """Check whether a file has an allowed file extension."""
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def database_name(name):
+    db_name = ''.join(name.split(" ")).lower()+".db"
+    return db_name
+
+def database_connect(name, data):
+    db_name = ''.join(name.split(" ")).lower()+".db"
+    db_path = os.path.join(DB_DIR, db_name)
+    db_script = os.path.join(SCHEMA_DIR, "recipe.sql")
+    connection = sql.connect(os.path.join(DB_DIR, db_name))
+    with open(db_script) as schema:
+        connection.executescript(schema.read())
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO recipe (recipename, filename, ingredients, directions) VALUES (?, ?, ?, ?)", (data["name"], data["filename"], data["ingredients"], (data["directions"])))
+    connection.commit()
+    connection.close()
+    return db_path
 
 
 def clean_file(filename):
@@ -51,6 +72,10 @@ def export_json(data):
     """Export JSON data from the created recipe."""
     return data
 
+def display_image(name):
+    OS_STATIC = os.path.join(app.config["UPLOAD_FOLDER"], name)
+    return OS_STATIC
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -62,11 +87,14 @@ def index():
 def sign_up():
     return render_template("sign_up.html")
 
+@app.route("/sign_in", methods=["GET", "POST"])
+def sign_in():
+    return render_template("sign_in.html")
+
 @app.route("/create", methods=["GET", "POST"])
 def create():
     """Create a recipe."""
     return render_template("create.html")
-
 
 @app.route("/preview", methods=["GET", "POST"])
 def preview():
@@ -83,21 +111,29 @@ def preview():
             filename = secure_filename(bg.filename)
             bg.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             clean_file(filename)
-        title = request.form["title"]
+        name = request.form["name"]
         ingredients = request.form["ingredients"]
-        data = {"title": title,
+        directions = request.form["directions"]
+        data = {"name": name,
+                "filename": display_image(filename),
                 "ingredients": ingredients,
-                "filename": os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                "directions": directions
                 }
-        return export_json(data)
-    return render_template("preview.html")
+        dbname = database_name(name)
+        db = database_connect(name, data)
+        return render_template("preview.html", data=export_json(data))
+    return render_template("404.html")
 
 
-@app.route('/export_html')
-def export_to_html(data):
+@app.route('/explore')
+def explore():
     """Export recipe to HTML file."""
-    return render_template("export.html")
+    return render_template("explore.html")
 
+@app.route('/export')
+def export():
+    """The value is hardcoded for pancakes till a working logic is obtained."""
+    return send_from_directory(DB_DIR, "pancakes.db")
 
 @app.errorhandler(404)
 def not_found(err):

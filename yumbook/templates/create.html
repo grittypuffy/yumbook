@@ -1,23 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{{ url_for('static', filename ='/css/style.css') }}" />
-	<title>Create - YumBook</title>
-	</head>
-  <body>
-	<div>
-	  <form action="/preview" method="post" enctype="multipart/form-data">
-		<label for="name">Title</label>
-		<input type="text" id="title" name="title">
-		<label for="ingredients">Ingredients</label>
-		<input type="text" id="ingredients" name="ingredients" />
-		<label for="background">Select a background image</label>
-		<input type="file" id="background" name="background" multiple />
-		<button type="submit">Create</button>
-	  </form>
+{% extends "base.html" %}
+{% block title %}Create Recipe{% endblock %}
+{% block content %}
+<h1 class="user-action">Create a recipe</h1>
+<div class="user-action">
+  <form action="/preview" method="post" enctype="multipart/form-data" class="create-form">
+	<div class="field">
+	  <label for="name" class="create-label">Recipe Name</label>
+	  <input type="text" class="create-input" id="name" name="name" placeholder="Recipe Name" required>
 	</div>
-  </body>
-</html>
+	<div class="field">
+	  <label for="ingredients" class="create-label">Ingredients</label>
+	  <input type="text" class="create-input" id="ingredients" name="ingredients" placeholder="Format: Ingredient 1,Ingredient 2" required>
+	</div>
+
+	<div class="field">
+	  <label for="directions" class="create-label">Directions</label>
+	  <textarea class="create-input" id="directions" name="directions" rows="10" cols="40" placeholder="Enter directions in a new line" required></textarea>
+	</div>
+	<div class="field">
+	  <label for="background" class="create-label submit">
+		<i icon-name="upload" class="icon"></i>Upload background image
+		<input type="file" class="create-input" id="background" name="background" required>
+	  </label>
+	</div>
+	<div class="field">
+	  <input type="submit" class="create-input" name="Submit" value="Create">
+	</div>
+  </form>
+</div>
+{% endblock %}

@@ -12,14 +12,12 @@
 	<div class="container">
 	  <header class="header">
 		<div class="item">
-		  <div class="favicon">
-			<img src="{{ url_for('static', filename='favicon/favicon.png') }}" width="65" height="65" />
-		  </div>
+		  <img src="{{ url_for('static', filename='favicon/favicon.png') }}" class="favicon" />
 		</div>
 		<div class="item">
 		  <nav class="actions">
 			<a class="action" href="/create">
-			  <i icon-name="file-plus" class="favicon"></i>
+			  <i icon-name="file-plus" class="icon"></i>
 			  Create
 			</a>
 			<a class="action" href="/preview">
@@ -34,14 +32,32 @@
 		</div>
 		<div class="item">
 		  <nav class="user">
+			{% if 1==0 %} <!--Comment this out and replace with appropriate logic -->
+			<a class="action" href="/sign_out"><i icon-name="log-out" class="icon"></i>Sign Out</a>
+			{% else %}
 			<a class="action" href="/sign_in"><i icon-name="log-in" class="icon"></i>Sign in</a>
-			<a class="action" href="/sign_up"><i icon-name="user" class="icon"></i>Sign up</a>
+			{% endif %}
+			<a class="action" href="/sign_up"><i icon-name="user-plus" class="icon"></i>Sign up</a>
 		  </nav>
 		</div>
 	  </header>
 	  <div class="content">
 		{% block content %}{% endblock %}
 	  </div>
+	  <footer class="footer">
+		<div class="item">
+		  <div class="copyleft">
+			<i icon-name="copyleft" class="icon"></i>
+			<small>YumBook project is available under GNU AGPLv3 or later</small>
+		  </div>
+		</div>
+		<div class="item">
+		  <div class="copyleft">
+			<i icon-name="creative-commons" class="icon"></i>
+			<small>This website is available under CC-BY-NC-SA 4.0</small>
+		  </div>
+		</div>
+	  </footer>
 	</div>
 	<script src="{{ url_for('static', filename='js/lib/lucide.js' ) }}"></script>
 	<script>
