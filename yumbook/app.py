@@ -48,16 +48,15 @@ def database_connect(name, data):
 
 def clean_file(filename):
     """Strip metadata from uploaded files to enhance privacy."""
-    os.chdir(app.config['UPLOAD_FOLDER'])
-    if filename.endswith(".jpg") or filename.endswith(".jpeg"):
-        exif = images.GdkPixbufAbstractParser(filename)
-        clean_exif(exif, filename)
-    elif filename.endswith(".png"):
-        exif = images.PNGParser(filename)
-        clean_exif(exif, filename)
+    validfile = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if validfile.endswith(".jpg") or validfile.endswith(".png") or validfile.endswith(".jpeg"):
+        exif = images.GdkPixbufAbstractParser(validfile)
+        clean_exif(exif, validfile)
+    elif validfile.endswith(".png"):
+        exif = images.PNGParser(validfile)
+        clean_exif(exif, validfile)
     else:
         flash('Invalid image file extension')
-    os.chdir(OS_CWD)
 
 
 def clean_exif(exif, filename):
